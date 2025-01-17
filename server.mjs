@@ -1,8 +1,9 @@
-const express = require('express');
-const cors = require('cors');
+import express from 'express';
+import cors from 'cors';
+// import fetch from 'node-fetch'; // Make sure to install this package: npm install node-fetch
 
 const app = express();
-const port = 8080; // You can change the port if needed
+const port = 8080;
 
 // Enable CORS for all routes
 app.use(cors());
@@ -18,7 +19,7 @@ app.get('/proxy', async (req, res) => {
     try {
         const response = await fetch(targetUrl);
         const contentType = response.headers.get('content-type');
-        const data = await response.buffer();
+        const data = await response.text(); // Use .text() for XML or textual data
 
         // Forward the response headers and content
         res.set('Content-Type', contentType);
